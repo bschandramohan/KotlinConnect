@@ -1,3 +1,5 @@
+package com.bschandramohan.learn.kotlinconnect
+
 fun main(args: Array<String>) {
     "Chandramohan".randomize()
     "Chandram".randomize()

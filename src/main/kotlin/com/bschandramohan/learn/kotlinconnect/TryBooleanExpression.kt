@@ -1,4 +1,4 @@
-
+package com.bschandramohan.learn.kotlinconnect
 val printAllOptionsOne: (Boolean, Boolean) -> Unit = { a: Boolean, b: Boolean -> println( a || (!a && !b)) }
 val printAllOptionsTwo: (Boolean, Boolean) -> Unit = { a: Boolean, b: Boolean -> println( a || !b) }
 

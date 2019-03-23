@@ -1,4 +1,6 @@
-// Generics for Calculator ; Refer to https://discuss.kotlinlang.org/t/how-to-write-generic-functions-for-all-numeric-types/7367
+package com.bschandramohan.learn.kotlinconnect
+
+// Generics for com.bschandramohan.learn.kotlinconnect.Calculator ; Refer to https://discuss.kotlinlang.org/t/how-to-write-generic-functions-for-all-numeric-types/7367
 // for some inspiration on making it work
 
 fun <T: Number> doSum(a: T, b: T) : T {
@@ -36,13 +38,13 @@ fun main(args: Array<String>) {
     println(doSum(3, 5))
     println(doSum(3.6, 5.2))
 
-    doOperation (2, 3, ::doSum) // Convention to call Higher order function
-    doOperation (8, 5, ::doDiff)
-    doOperation (5, 8) { x, y -> x * y }
+    doOperation(2, 3, ::doSum) // Convention to call Higher order function
+    doOperation(8, 5, ::doDiff)
+    doOperation(5, 8) { x, y -> x * y }
 
-    doOperation (2.5, 3.6, ::doSum)
-    doOperation (8, 5, ::doDiff)
-    doOperation (5.9, 8.6) { x, y -> x * y }
+    doOperation(2.5, 3.6, ::doSum)
+    doOperation(8, 5, ::doDiff)
+    doOperation(5.9, 8.6) { x, y -> x * y }
 }
 
 

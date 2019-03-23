@@ -1,4 +1,4 @@
-
+package com.bschandramohan.learn.kotlinconnect
 class AClass() {
     var i: Int = 0
 

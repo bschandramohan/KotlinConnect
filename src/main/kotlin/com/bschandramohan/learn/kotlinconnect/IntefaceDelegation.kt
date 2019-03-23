@@ -1,11 +1,13 @@
+package com.bschandramohan.learn.kotlinconnect
+
 // Interface Delegation:  Use instead of Abstract classes and lots of subclasses. Adds behavior
 
-// Animal - Land , Water
-// Animal - Herbivore, Carnivore
+// com.bschandramohan.learn.kotlinconnect.Animal - Land , Water
+// com.bschandramohan.learn.kotlinconnect.Animal - com.bschandramohan.learn.kotlinconnect.Herbivore, com.bschandramohan.learn.kotlinconnect.Carnivore
 
 class Animal(stayType: StayType, eatType: EatType) : StayType by stayType, EatType by eatType {
     override fun toString(): String {
-        return "Animal of StayType=$stayType and eatingType=$eatType"
+        return "com.bschandramohan.learn.kotlinconnect.Animal of com.bschandramohan.learn.kotlinconnect.StayType=$stayType and eatingType=$eatType"
     }
 }
 
@@ -38,8 +40,14 @@ object Carnivore: EatType {
 }
 
 fun main(args: Array<String>) {
-    val lion = Animal(LandStay, Carnivore)
-    val crownFish = Animal(WaterStay, Herbivore)
+    val lion = Animal(
+        LandStay,
+        Carnivore
+    )
+    val crownFish = Animal(
+        WaterStay,
+        Herbivore
+    )
 
     println(lion)
     println(crownFish)

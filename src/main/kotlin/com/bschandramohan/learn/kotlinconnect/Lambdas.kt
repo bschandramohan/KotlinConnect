@@ -1,4 +1,4 @@
-
+package com.bschandramohan.learn.kotlinconnect
 
 // Lambda Expression
 var sum = { a: Int, b: Int -> a + b }
@@ -18,11 +18,11 @@ var operation0 = { a: Int, b: Int, operate: (Int, Int) -> Int -> operate(a, b) }
 var operation1: (Int, Int, (Int, Int) -> Int) -> Int = { a, b, operate -> operate(a, b) }
 
 fun main(args: Array<String>) {
-    println(operation (2, 3, sum))
-    println(operation (8, 5, diff))
-    println(operation (5, 8) { x, y -> x * y })
-    println(operation0 (5, 8, sum))
-    println(operation1 (5, 8, sum))
+    println(operation(2, 3, sum))
+    println(operation(8, 5, diff))
+    println(operation(5, 8) { x, y -> x * y })
+    println(operation0(5, 8, sum))
+    println(operation1(5, 8, sum))
 
 }
 

@@ -1,5 +1,7 @@
+package com.bschandramohan.learn.kotlinconnect
+
 /**
- * Calculator class that takes a Number type as parameter and gives operations like sum and diff
+ * com.bschandramohan.learn.kotlinconnect.Calculator class that takes a Number type as parameter and gives operations like com.bschandramohan.learn.kotlinconnect.getSum and com.bschandramohan.learn.kotlinconnect.getDiff
  *
  * @author bschandramohan
  */
@@ -44,6 +46,6 @@ fun main(args: Array<String>) {
     println(mathClass.doDiff(13, 5))
 
     println(mathClass.doOperation(4, 6, ::doSum))
-    // Give the operation at invocation time instead of creating a function and invoking it
+    // Give the com.bschandramohan.learn.kotlinconnect.operation at invocation time instead of creating a function and invoking it
     println(mathClass.doOperation(5,7) { x, y -> x * y })
 }
