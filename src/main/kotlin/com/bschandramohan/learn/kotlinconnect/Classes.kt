@@ -1,4 +1,18 @@
 package com.bschandramohan.learn.kotlinconnect
+
+import java.util.*
+
+
+class NoPropertiesClass
+
+class ConstructorArgumentClass(var name: String)
+
+class DefaultArgumentConstructorArgumentClass(var name: String = "NAME")
+
+class SecondaryConstructorClass(var name: String) {
+    constructor() : this(UUID.randomUUID().toString())
+}
+
 // open keyword required for ability to use subclasses
 open class Foo {
     open fun f() { println("com.bschandramohan.learn.kotlinconnect.Foo.f()") }
@@ -79,6 +93,19 @@ class TryClass0() {
 
 
 fun main(args: Array<String>) {
+
+    println("NoPropertiesClass = ${NoPropertiesClass()}")
+    // println(ConstructorArgumentClass()) // ERROR: Why not? How to?
+
+    val constructorArgumentClass = ConstructorArgumentClass("Chandra")
+    println("ConstructorArgumentClass = ${constructorArgumentClass.name}")
+
+    val defaultArgumentConstructorArgumentClass = DefaultArgumentConstructorArgumentClass()
+    println("DefaultArgumentConstructorArgumentClass = ${defaultArgumentConstructorArgumentClass.name}")
+
+    val secondaryConstructorClass = SecondaryConstructorClass()
+    println("SecondaryConstructorClass name=${secondaryConstructorClass.name}")
+
     val obj1 = TryClass("com.bschandramohan.learn.kotlinconnect.TryClass name")
     println(obj1)
 
@@ -88,4 +115,5 @@ fun main(args: Array<String>) {
     val bar = Bar()
     val baz = bar.baz
     baz.g()
+
 }
