@@ -7,9 +7,19 @@ fun arrayList() {
 
     val mutableList : MutableList<String> = ArrayList()
     mutableList.add("Chandra")
+    mutableList.add("Mohan")
     mutableList.forEach(::println)
 }
 
+fun map() {
+    val map = mutableMapOf<String, String> ()
+    map["First Name"] = "Chandra"
+    map["Second Name"] = "Mohan"
+
+    println(map.getOrDefault("First Name", "DEFAULT"))
+}
+
 fun main() {
-    arrayList()
+   // arrayList()
+    map()
 }
