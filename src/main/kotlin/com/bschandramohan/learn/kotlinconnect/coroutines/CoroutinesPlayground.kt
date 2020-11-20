@@ -1,67 +1,83 @@
 package com.bschandramohan.learn.kotlinconnect.coroutines
 
+import jdk.nashorn.internal.objects.Global
 import kotlinx.coroutines.*
 import java.time.LocalDateTime
 import kotlin.random.Random
+import kotlin.system.measureTimeMillis
 
 class CoroutinesPlayground {
     fun launchSimplePrint() {
-        println("[${printThreadInfo()}] Launching")
+        val executionTime = measureTimeMillis {
+            println("[${printThreadInfo()}] Launching")
 
-        GlobalScope.launch {
-            println("[${printThreadInfo()}]In Coroutine")
+            GlobalScope.launch {
+                println("[${printThreadInfo()}]In Coroutine")
+            }
+
+            println("[${printThreadInfo()}] Finished")
+            Thread.sleep(100)
         }
-
-        println("[${printThreadInfo()}] Finished")
-        Thread.sleep(1000)
+        // Note: The first GlobalScope.launch takes time in a program execution
+        println("Time taken for launchSimplePrint=$executionTime")
     }
 
     fun launchSimpleFunction() {
-        println("[${printThreadInfo()}] Launching")
-
-        GlobalScope.launch {
-            var sumSquares = 0
-            (1..1000).forEach {
-                sumSquares += it * it
-            }
-            println("[${printThreadInfo()}] In Coroutine - Sum squares = $sumSquares")
-        }
-
-        println("[${printThreadInfo()}] Finished")
-        Thread.sleep(10000)
-    }
-
-    fun launchSimpleFunctionWait() {
-        runBlocking {
+        val executionTime = measureTimeMillis {
             println("[${printThreadInfo()}] Launching")
 
-            val job = GlobalScope.launch {
-                var sumSquares = 0
-                (1..1000).forEach {
+            GlobalScope.launch {
+                var sumSquares = 0L
+                (1..10000).forEach {
                     sumSquares += it * it
                 }
-                println("[${printThreadInfo()}] In Coroutine - Sum squares = $sumSquares")
+                println("[${printThreadInfo()}] In Coroutine launchSimpleFunction - Sum squares = $sumSquares")
             }
 
             println("[${printThreadInfo()}] Finished")
-            job.join()
+            Thread.sleep(100)
         }
+        println("Time taken for launchSimpleFunction=$executionTime")
     }
 
     fun launchSimpleFunctionJoin() {
-        runBlocking {
-            println("[${printThreadInfo()}] Launching")
+        val executionTime = measureTimeMillis {
+            runBlocking {
+                println("[${printThreadInfo()}] Launching")
 
-            launch {
-                var sumSquares = 0
-                (1..1000).forEach {
-                    sumSquares += it * it
+                val job = GlobalScope.launch {
+                    var sumSquares = 0
+                    (1..1000).forEach {
+                        sumSquares += it * it
+                    }
+                    println("[${printThreadInfo()}] In Coroutine launchSimpleFunctionWait - Sum squares = $sumSquares")
                 }
-                println("[${printThreadInfo()}] In Coroutine - Sum squares = $sumSquares")
-            }
 
-            println("[${printThreadInfo()}] Finished")
+                println("[${printThreadInfo()}] Finished")
+                job.join()
+            }
         }
+        println("Time taken for launchSimpleFunctionWait=$executionTime")
+    }
+
+    fun launchSimpleFunctionWaitWithDelay() {
+        val executionTime = measureTimeMillis {
+            runBlocking {
+                println("[${printThreadInfo()}] Launching")
+
+                launch {
+                    var sumSquares = 0L
+                    (1..1000000).forEach {
+                        sumSquares += it * it
+                    }
+                    delay(500)
+                    println("[${printThreadInfo()}] In Coroutine launchSimpleFunctionJoin - Sum squares = $sumSquares")
+                }
+
+                println("[${printThreadInfo()}] Finished")
+            }
+        }
+        println("Time taken for launchSimpleFunctionJoin=$executionTime")
     }
 
     private suspend fun printA() {
@@ -79,8 +95,63 @@ class CoroutinesPlayground {
     }
 
     suspend fun launchSequentialSuspendFun() {
-        printA()
-        printB()
+        val executionTime = measureTimeMillis {
+            printA()
+            printB()
+        }
+        println("Time taken for launchSequentialSuspendFun=$executionTime")
+    }
+
+    fun launchSequentialSuspendFunInGlobalLaunch() {
+        GlobalScope.launch {
+            val executionTime = measureTimeMillis {
+                printA()
+                printB()
+            }
+            println("Time taken for launchSequentialSuspendFunInGlobalLaunch=$executionTime")
+        }
+    }
+
+    fun launchSequentialSuspendFunInRunBlocking() {
+        runBlocking {
+            val executionTime = measureTimeMillis {
+                printA()
+                printB()
+            }
+            println("Time taken for launchSequentialSuspendFunInRunBlocking=$executionTime")
+        }
+    }
+
+    fun launchSequentialSuspendFunInGlobalLaunchMultipleLaunch() {
+        GlobalScope.launch {
+            val executionTime = measureTimeMillis {
+                launch {
+                    printA()
+                }
+                launch {
+                    printB()
+                }
+            }
+            println("Time taken for launchSequentialSuspendFunInGlobalLaunch=$executionTime")
+        }
+    }
+
+
+    fun launchSequentialSuspendFunInRunBlockingMultipleLaunch() {
+        println("[${printThreadInfo()}]")
+
+        runBlocking(Dispatchers.Default) {
+            println("[${printThreadInfo()}]")
+            val executionTime = measureTimeMillis {
+                launch {
+                    printA()
+                }
+                launch {
+                    printB()
+                }
+            }
+            println("Time taken for launchSequentialSuspendFunInGlobalLaunch=$executionTime")
+        }
     }
 
     private suspend fun printARandomCount() : Int {
@@ -104,27 +175,38 @@ class CoroutinesPlayground {
     }
 
     fun launchSequentialSuspendFunReturn() {
-        runBlocking {
-            launch {
-                val x = printARandomCount()
-                val y = printBRandomCount()
-                println("[${printThreadInfo()}] x+y=${x + y}")
+        val executionTime = measureTimeMillis {
+            runBlocking {
+                launch {
+                    val x = printARandomCount()
+                    val y = printBRandomCount()
+                    println("[${printThreadInfo()}] x+y=${x + y}")
+                }
             }
         }
+        println("Time taken for launchSequentialSuspendFunReturn=$executionTime")
     }
 
     fun launchAsyncSuspendFunReturn() {
-        runBlocking {
-            val x = async { printARandomCount() }
-            val y = async { printBRandomCount() }
-            println("[${printThreadInfo()}] x+y=${x.await() + y.await()}")
+        val executionTime = measureTimeMillis {
+            runBlocking {
+                val x = async { printARandomCount() }
+                val y = async { printBRandomCount() }
+                println("[${printThreadInfo()}] x+y=${x.await() + y.await()}")
+            }
         }
+        println("Time taken for launchAsyncSuspendFunReturn=$executionTime")
     }
 
     suspend fun launchAsyncCoroutineScope() : Int = coroutineScope {
-        val x = async { printARandomCount() }
-        val y = async { printBRandomCount() }
-        x.await() + y.await()
+        var result = 0
+        val executionTime = measureTimeMillis {
+            val x = async { printARandomCount() }
+            val y = async { printBRandomCount() }
+            result = x.await() + y.await()
+        }
+        println("Time taken for launchAsyncCoroutineScope=$executionTime")
+        return@coroutineScope result
     }
 
 
@@ -133,16 +215,37 @@ class CoroutinesPlayground {
 
 fun main() {
     CoroutinesPlayground().run {
+//        println("launchSimplePrint")
 //        launchSimplePrint()
+//        println("launchSimpleFunction")
 //        launchSimpleFunction()
-//        launchSimpleFunctionWait()
+//        println("launchSimpleFunctionWaitWithDelay")
+//        launchSimpleFunctionWaitWithDelay()
+//        println("launchSimpleFunctionJoin")
 //        launchSimpleFunctionJoin()
-//        launchSequentialSuspendFun()
-//        launchSequentialSuspendFunReturn()
-//        launchAsyncSuspendFunReturn()
+//        println("launchSequentialSuspendFun")
+//        runBlocking {
+//            launchSequentialSuspendFun()
+//        }
 
-        runBlocking {
-            println("[${printThreadInfo()}] launchAsyncCoroutineScope return=${launchAsyncCoroutineScope()}")
-        }
+//        println("launchSequentialSuspendFunInGlobalLaunch")
+//        launchSequentialSuspendFunInGlobalLaunch()
+//        println("launchSequentialSuspendFunInRunBlocking")
+//        launchSequentialSuspendFunInRunBlocking()
+//        println("launchSequentialSuspendFunInGlobalLaunchMultipleLaunch")
+//        launchSequentialSuspendFunInGlobalLaunchMultipleLaunch()
+        println("launchSequentialSuspendFunInRunBlockingMultipleLaunch")
+        launchSequentialSuspendFunInRunBlockingMultipleLaunch()
+
+//        println("launchSequentialSuspendFunReturn")
+//        launchSequentialSuspendFunReturn()
+//        println("launchAsyncSuspendFunReturn")
+//        launchAsyncSuspendFunReturn()
+//
+//        println("launchAsyncCoroutineScope")
+//        runBlocking {
+//            println("[${printThreadInfo()}] launchAsyncCoroutineScope return=${launchAsyncCoroutineScope()}")
+//        }
+        Thread.sleep(5000)
     }
 }

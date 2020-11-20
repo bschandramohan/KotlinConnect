@@ -3,9 +3,7 @@ package com.bschandramohan.learn.kotlinconnect.coroutines
 import kotlinx.coroutines.*
 import kotlin.random.Random
 
-class CoroutinesDivideAndConquer {
-
-}
+class CoroutinesDivideAndConquer
 
 suspend fun performOperation(data: List<String>) {
     println("Begin DataSet")
