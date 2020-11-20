@@ -8,7 +8,8 @@ class VetoableObservables {
         if (newValue in arrayOf("US", "UK", "AU", "CA"))
             return@vetoable true
         println("ERROR! Invalid country=$newValue passed. We will use prevValue=$prevValue")
-        return@vetoable false
+        false
+        //return@vetoable false
     }
 }
 
