@@ -123,7 +123,9 @@ class CoroutinesPlayground {
     }
 
     fun launchSequentialSuspendFunInGlobalLaunchMultipleLaunch() {
+        println("[${printThreadInfo()}")
         GlobalScope.launch {
+            println("[${printThreadInfo()}")
             val executionTime = measureTimeMillis {
                 launch {
                     printA()
@@ -136,10 +138,8 @@ class CoroutinesPlayground {
         }
     }
 
-
     fun launchSequentialSuspendFunInRunBlockingMultipleLaunch() {
         println("[${printThreadInfo()}]")
-
         runBlocking(Dispatchers.Default) {
             println("[${printThreadInfo()}]")
             val executionTime = measureTimeMillis {
