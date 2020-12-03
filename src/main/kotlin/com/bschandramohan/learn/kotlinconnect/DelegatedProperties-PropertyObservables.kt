@@ -22,10 +22,10 @@ fun main() {
 
     println("\n")
 
-    val trip = Trip(100.0)
-    println("$trip, ${trip.distance}")
-    trip.distance = 10
-    println("$trip, ${trip.distance}")
+//    val trip = Trip(100.0)
+//    println("$trip, ${trip.distance}")
+//    trip.distance = 10
+//    println("$trip, ${trip.distance}")
 }
 
 data class Trip(var deduction: Double) {
