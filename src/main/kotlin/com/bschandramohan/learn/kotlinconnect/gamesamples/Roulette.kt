@@ -1,4 +1,4 @@
-package com.bschandramohan.learn.kotlinconnect.roulette
+package com.bschandramohan.learn.kotlinconnect.gamesamples
 
 import kotlin.random.Random
 
