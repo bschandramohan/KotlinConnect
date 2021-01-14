@@ -1,6 +1,6 @@
 # KotlinConnect
 
-Simple Examples of Kotlin concepts
+Simple Examples of Kotlin concepts:
 
 1. Kotlin core samples in root of kotlinConnect folder
 1. Coroutine samples in package: coroutines
