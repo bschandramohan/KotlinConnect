@@ -234,13 +234,13 @@ fun main() {
 //        launchSequentialSuspendFunInRunBlocking()
 //        println("launchSequentialSuspendFunInGlobalLaunchMultipleLaunch")
 //        launchSequentialSuspendFunInGlobalLaunchMultipleLaunch()
-        println("launchSequentialSuspendFunInRunBlockingMultipleLaunch")
-        launchSequentialSuspendFunInRunBlockingMultipleLaunch()
+//        println("launchSequentialSuspendFunInRunBlockingMultipleLaunch")
+//        launchSequentialSuspendFunInRunBlockingMultipleLaunch()
 
 //        println("launchSequentialSuspendFunReturn")
 //        launchSequentialSuspendFunReturn()
-//        println("launchAsyncSuspendFunReturn")
-//        launchAsyncSuspendFunReturn()
+        println("launchAsyncSuspendFunReturn")
+        launchAsyncSuspendFunReturn()
 //
 //        println("launchAsyncCoroutineScope")
 //        runBlocking {
