@@ -20,8 +20,8 @@ suspend fun runMethodsAsync() = coroutineScope {
         performMultiplications()
     }
 
-//    sum.await()
-//    product.await()
+    sum.await()
+    product.await()
 }
 
 suspend fun performAdds() {

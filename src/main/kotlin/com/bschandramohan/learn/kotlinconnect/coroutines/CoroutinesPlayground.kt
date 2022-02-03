@@ -1,6 +1,5 @@
 package com.bschandramohan.learn.kotlinconnect.coroutines
 
-import jdk.nashorn.internal.objects.Global
 import kotlinx.coroutines.*
 import java.time.LocalDateTime
 import kotlin.random.Random
