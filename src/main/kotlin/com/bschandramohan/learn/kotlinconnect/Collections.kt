@@ -19,6 +19,14 @@ fun map() {
     println(map.getOrDefault("First Name", "DEFAULT"))
 }
 
+fun listMutableListSample() {
+    val listNearbyPlanets = listOf("Mercury", "Venus", "Mars")
+    val mutableListNearbyPlanets = mutableListOf("Mercury", "Venus", "Mars")
+
+    mutableListNearbyPlanets.filter { planet -> planet.startsWith("M") }
+    mutableListNearbyPlanets.add("Jupiter")
+}
+
 fun main() {
    // arrayList()
     map()
