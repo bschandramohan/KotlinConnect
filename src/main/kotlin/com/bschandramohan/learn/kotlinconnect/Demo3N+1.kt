@@ -1,5 +1,6 @@
 package com.bschandramohan.learn.kotlinconnect
 
+import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
@@ -23,7 +24,7 @@ class `Demo3N+1` {
         }
 
         println("Input Number=$n TotalLoopCount=$loopCount HighestInlineNumber=$highestInlineNumber " +
-                "timeTakenInMicroseconds=${timeTaken.inMicroseconds}")
+                "timeTakenInMicroseconds=${timeTaken.toDouble(DurationUnit.MICROSECONDS)}")
 
         return Pair(loopCount, highestInlineNumber)
     }
